@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SS Creative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            /* Disable text selection */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            cursor: default !important;
+        }
+
+        :root {
+            --primary-color: #ffffff;
+            --primary-dark: #cccccc;
+            --accent-color: #ffffff;
+            --dark-bg: #000000;
+            --light-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-dark: #000000;
+            --border-color: #333333;
+            --success: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: var(--dark-bg);
+            position: relative;
+            overflow-x: hidden;
+            /* Additional protection */
+            -webkit-touch-callout: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Allow text cursor only in input fields */
+        input, textarea {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            cursor: text !important;
+        }
+
+        /* Keep pointer cursor for interactive elements */
+        a, button, .back-button, .submit-btn {
+            cursor: pointer !important;
+        }
+
+        /* Override text cursor for all text elements */
+        p, span, h1, h2, h3, h4, h5, h6, div, label {
+            cursor: default !important;
+        }
+
+
+
+
+
+        .custom-cursor {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    border: 2px solid var(--primary-color);
+    border-radius: 37%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    left: 0;
+    top: 0;
+    transition: 0.06s;
+    display: none;
+}
+
+/* Show custom cursor only on desktop devices */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    .custom-cursor {
+        display: block;
+    }
+}
+
+.custom-cursor.hover {
+    width: 38px;
+    height: 38px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.custom-cursor.active {
+    opacity: 1;
+}
+
+.custom-cursor.click {
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+}
+
+.cursor-dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: var(--primary-color);
+    border-radius: 35%;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translate(-50%, -50%);
+    left: 0;
+    top: 0;
+    transition: 0.04s;
+    display: none;
+}
+
+/* Show cursor dot only on desktop devices */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+    .cursor-dot {
+        display: block;
+    }
+}
+
+.cursor-dot.active {
+    opacity: 1;
+}
+
+.cursor-dot.hover {
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.cursor-dot.click {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+        .back-button {
+            position: absolute;
+            top: 40px;
+            left: 475px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.9), rgba(40, 40, 40, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(40, 40, 40, 0.9));
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .back-button:active{
+            transform: scale(0.9);
+        }
+
+        .back-arrow {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .back-button:hover .back-arrow {
+            transform: translateX(-7px);
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .contact-container {
+            max-width: 600px;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(40, 40, 40, 0.95));
+            border: 1px solid #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+            0 0 10px rgba(255, 255, 255, 0.5)inset;
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-header {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 5px;
+        }
+
+        .brand-tagline {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            opacity: 0.8;
+            letter-spacing: 2px;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            opacity: 0.8;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        label .required {
+            color: var(--secondary-color);
+            margin-left: 2px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+   
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: auto;
+            padding: 12px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
+                5px 5px 7px rgb(0, 0, 0, 0.65) inset,
+                -5px -5px 7px rgba(255, 255, 255, 0.75) inset;
+            margin-top: 10px;
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .submit-btn:hover {
+            color: #000000;
+            background: #cccccc;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5),
+                5px 5px 7px rgb(255, 255, 255, 0.75) inset,
+                -5px -5px 7px rgba(255, 255, 255, 0.85) inset;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: var(--secondary-color);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        input.error,
+        textarea.error {
+            border-color: var(--secondary-color);
+        }
+
+        .whatsapp-info {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .whatsapp-info p {
+            color: var(--text-light);
+            opacity: 0.7;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .whatsapp-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--success);
+        }
+
+        @media (max-width: 600px) {
+
+            .back-button {
+                top: 30px;
+                left: 30px;
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .back-arrow {
+                width: 16px;
+                height: 16px;
+            }
+
+            .contact-container {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .contact-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-dot"></div>
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">
+        <svg class="back-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+    </a>
+
+    <div class="contact-container">
+        <div class="logo-header">
+            <img src="logoo.png" alt="SS Creative Logo" style="max-width: 115px; height: auto; margin-bottom: 10px;">
+        </div>
+        
+        <h2 class="contact-title">Contact</h2>
+        <p class="contact-subtitle">Please Fill out the Form below and we'll get back to you shortly.</p>
+
+        <form id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name <span class="required">:</span></label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <span class="error-message" id="firstNameError">Please enter your first name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name <span class="required">:</span></label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <span class="error-message" id="lastNameError">Please enter your last name</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number <span class="required">:</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="+964 XXX XXX XXXX" required>
+                <span class="error-message" id="phoneError">Please enter a valid phone number</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email <span class="required">:</span></label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                <span class="error-message" id="emailError">Please enter a valid email address</span>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Your Message <span class="required">:</span></label>
+                <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                <span class="error-message" id="messageError">Please enter your message</span>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+
+        <div class="whatsapp-info">
+            <p>
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Your message will be sent directly to WhatsApp
+            </p>
+        </div>
+    </div>
+
+    <script>
+
+        // ==================== CUSTOM CURSOR ==================== 
+document.addEventListener('DOMContentLoaded', () => {
+    const cursor = document.querySelector('.custom-cursor');
+    const cursorDot = document.querySelector('.cursor-dot');
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorVisible = false;
+
+    // Update cursor position continuously
+    const updateCursorPosition = () => {
+        if (cursorVisible) {
+            const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollX = window.pageXOffset || document.documentElement.scrollLeft;
+            
+            cursor.style.left = (mouseX + scrollX) + 'px';
+            cursor.style.top = (mouseY + scrollY) + 'px';
+            cursorDot.style.left = (mouseX + scrollX) + 'px';
+            cursorDot.style.top = (mouseY + scrollY) + 'px';
+        }
+        requestAnimationFrame(updateCursorPosition);
+    };
+
+    // Start continuous update loop
+    updateCursorPosition();
+
+    // Track mouse movement using clientX/clientY
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Make cursor visible
+        cursor.style.opacity = '1';
+        cursorDot.style.opacity = '1';
+        cursorVisible = true;
+    });
+
+    // Hide cursor when leaving window
+    document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        cursorDot.style.opacity = '0';
+        cursorVisible = false;
+    });
+
+    // Show cursor when entering window
+    document.addEventListener('mouseenter', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.opacity = '1';
+        cursorDot.style.opacity = '1';
+        cursorVisible = true;
+    });
+
+    // Add hover effect on interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .service-card, .team-member, .nav-link, .hamburger');
+    
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.classList.add('hover');
+            cursorDot.classList.add('hover');
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hover');
+            cursorDot.classList.remove('hover');
+        });
+    });
+
+    // Add click effect
+    document.addEventListener('mousedown', () => {
+        cursor.classList.add('click');
+        cursorDot.classList.add('click');
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.classList.remove('click');
+        cursorDot.classList.remove('click');
+    });
+});
+
+
+
+
+
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+            document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('error'));
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            let isValid = true;
+            
+            // Validation
+            if (!firstName) {
+                showError('firstName', 'firstNameError');
+                isValid = false;
+            }
+            
+            if (!lastName) {
+                showError('lastName', 'lastNameError');
+                isValid = false;
+            }
+            
+            if (!phone) {
+                showError('phone', 'phoneError');
+                isValid = false;
+            }
+            
+            if (!email || !isValidEmail(email)) {
+                showError('email', 'emailError');
+                isValid = false;
+            }
+            
+            if (!message) {
+                showError('message', 'messageError');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Create WhatsApp message
+                const whatsappMessage = `*New Contact Request from SS Creative Website*%0A%0A` +
+                    `*Name:* ${firstName} ${lastName}%0A` +
+                    `*Phone:* ${phone}%0A` +
+                    `*Email:* ${email}%0A%0A` +
+                    `*Message:*%0A${message}`;
+                
+                // Redirect to WhatsApp
+                const whatsappURL = "https://wa.me/9647503152324?text=" + whatsappMessage;
+                window.open(whatsappURL, '_blank');
+                
+                // Reset form
+                this.reset();
+                
+                // Show success message (optional)
+                alert('Opening WhatsApp... Your message is ready to send!');
+            }
+        });
+        
+        function showError(inputId, errorId) {
+            document.getElementById(inputId).classList.add('error');
+            document.getElementById(errorId).classList.add('show');
+        }
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Remove error on input
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorId = this.id + 'Error';
+                document.getElementById(errorId).classList.remove('show');
+            });
+        });
+
+        // ==================== CODE PROTECTION REMOVED ====================
+        // All protections disabled - right-click, shortcuts, etc. are now enabled
+    </script>
+</body>
+</html>
